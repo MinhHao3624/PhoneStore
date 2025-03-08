@@ -1,4 +1,4 @@
-# PhoneStore - Ưeb Programming Internship Project
+# PhoneStore - Web Programming Internship Project
 Website Quản Lí Bán Điện Thoại - JSP/Servlet
 
 Danh sách thành viên:
