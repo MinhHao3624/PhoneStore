@@ -1,6 +1,7 @@
-# PhoneManageWebsite
+# PhoneStore - Ưeb Programming Internship Project
 Website Quản Lí Bán Điện Thoại - JSP/Servlet
 
-Thành viên 1: 22130063 - Trần Anh Duy
-
-Thành viên 2: 22130074 - Nguyễn Võ Minh Hào
+Danh sách thành viên:
+22130063 - Trần Anh Duy
+22130074 - Nguyễn Võ Minh Hào
+22130306 - Phạm Nhật Tường
