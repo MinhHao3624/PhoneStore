@@ -281,7 +281,7 @@
 								<li><a href="http://localhost:8080/MobileWebApp/dang-xuat"
 									class="title hidden-xs">Log out </a></li>
 								<li><a href="load-page-favorite-list?userID=${sessionScope.khachHang.userID}"><i class="fa fa-heart"></i><sup class="cart-quantity">${soLuongSanPhamLike}</sup></a></li>
-								<li><a href="go-to-cart" class="title"><i
+								<li><a href="cart.html" class="title"><i
 										class="fa fa-shopping-cart"></i><sup class="cart-quantity">${soLuongSP}</sup></a>
 								</li>
 							</c:if>
@@ -304,9 +304,10 @@
 								<li><a
 									href="http://localhost:8080/MobileWebApp/load-product?page=1">Điện
 										thoại</a></li>
-								<li><a href="go-to-blog">Thông tin</a></li>
-								<li><a href="go-to-about">Bài viết</a></li>
-								<li><a href="http://localhost:8080/MobileWebApp/go-to-contactus">Liên hệ, hỗ trợ</a></li>
+								<li><a href="blog-default.html">Bài viết</a></li>
+								<li><a href="about.html">Thông tin</a></li>
+
+								<li><a href="contact-us.html">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>
@@ -353,7 +354,6 @@
 													<img src="imagesphone/iphone13-trang.webp" alt="">
 												</div>
 										</a></li> -->
-										<c:if test="${imgString.size() != 0 }">
 										<c:forEach var="string" items="${imgString}">
 											<li><a href="imagesphone/${string}" alt="">
 													<div class="thumb-img"
@@ -362,10 +362,6 @@
 													</div>
 											</a></li>
 										</c:forEach>
-										</c:if>
-										<c:if test="${imgString.size() == 0}">
-										<img src="imagesphone/${imageAnh}" alt="" style="width: 200px; height: 200px; margin-left: 100px">
-										</c:if>
 									</ul>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -430,11 +426,11 @@
 												có sẵn</span>
 										</div>
 										<div>
-										<c:if test="${not empty sessionScope.khachHang}">
-											<button type="submit" class="btn btn-default add-to-cart" data-product-id="${productTmp.productID}">
+											<button class="btn btn-default btn-buy-now">Mua Ngay
+											</button>
+											<button type="submit" class="btn btn-default">
 												<i class="fa fa-shopping-cart"></i>&nbsp;Thêm vào giỏ hàng
 											</button>
-											</c:if>
 
 										</div>
 
@@ -1364,32 +1360,6 @@
 
 			return isValid; // Chỉ submit khi hợp lệ
 		}
-	</script>
-	<script type="text/javascript">
-	document.querySelector('.add-to-cart').addEventListener('click', function() {
-	    const productID = this.getAttribute('data-product-id');
-
-	    fetch(`add-to-cart2?productID=`+productID, {
-	        method: 'GET',
-	    })
-	    .then(response => response.json()) // Chuyển đổi kết quả thành JSON
-        .then(data => {
-            if (data.success) {
-            	   // Cập nhật số lượng sản phẩm trong giỏ hàng
-    	        const cartQuantityElement = document.querySelector('.cart-quantity');
-    	        cartQuantityElement.textContent = data.soluongSP;
-            } else {
-                alert("Xóa sản phẩm thất bại: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("Đã xảy ra lỗi khi xóa sản phẩm.");
-        });
-	});
-
-	
-	
 	</script>
 	<script type="text/javascript">
 		$('#slideshow').desoSlide({

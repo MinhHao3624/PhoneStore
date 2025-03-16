@@ -41,7 +41,7 @@ public class ProfiesResetPassWordCon extends HttpServlet {
 			User user = (User) session.getAttribute("khachHang");
 			if(user != null) {
 				ProductFavoriteDAO productFaDao = new ProductFavoriteDAO();
-				int lstProductFavoriteDao = productFaDao.getSoLuong2(user.getUserID());
+				List<ProductFavorite> lstProductFavoriteDao = productFaDao.getLstProFavorite(user.getUserID());
 				ListOrderDetailsItem li = (ListOrderDetailsItem) session.getAttribute("listItem");
 				String slSP = "";
 				if (li != null) {
@@ -51,7 +51,7 @@ public class ProfiesResetPassWordCon extends HttpServlet {
 					slSP = "0";
 				}
 				request.setAttribute("soLuongSP", slSP);
-				request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao);
+				request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao.size());
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/profile-reset-password.jsp");
 				rd.forward(request, response);
 			}

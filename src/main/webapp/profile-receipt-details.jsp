@@ -207,7 +207,7 @@
 								<li><a
 									href="load-page-favorite-list?userID=${sessionScope.khachHang.userID}"><i
 										class="fa fa-heart"></i><sup class="cart-quantity">${soLuongSanPhamLike}</sup></a></li>
-								<li><a href="go-to-cart" class="title"><i
+								<li><a href="cart.html" class="title"><i
 										class="fa fa-shopping-cart"></i><sup class="cart-quantity">${soLuongSP}</sup></a>
 								</li>
 							</c:if>
@@ -230,9 +230,10 @@
 								<li><a
 									href="http://localhost:8080/MobileWebApp/load-product?page=1">Điện
 										thoại</a></li>
-								<li><a href="go-to-blog">Thông tin</a></li>
-								<li><a href="go-to-about">Bài viết</a></li>
-								<li><a href="http://localhost:8080/MobileWebApp/go-to-contactus">Liên hệ, hỗ trợ</a></li>
+								<li><a href="blog-default.html">Bài viết</a></li>
+								<li><a href="about.html">Thông tin</a></li>
+
+								<li><a href="contact-us.html">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>
@@ -279,8 +280,6 @@
 									<li class="slide-bar active"><i class="fas fa-money-check"></i><span>Quản
 											lý đơn hàng</span></li>
 								</a>
-								<a href="go-to-phan-hoi?page=1"><li class="slide-bar"><i
-										class="fas fa-money-check"></i><span>Phản hồi</span></li></a>
 								<!-- <a href="address-deliver.html"><li class="slide-bar"><i class="fas fa-map-marker-alt"></i><span> Địa chỉ nhận hàng</span></li></a> -->
 								<a
 									href="http://localhost:8080/MobileWebApp/profile-reset-password?userID=${sessionScope.khachHang.userID}">
@@ -309,16 +308,6 @@
 									<p class="address">Địa chỉ: ${orders.shippingAddress}</p>
 								</div>
 							</div>
-							<a href="kiemTraThanhToan?orderID=${orders.orderID}"
-								style="text-decoration: none;"> <input type="button"
-								value="Thanh Toán"
-								style="cursor: pointer; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
-							</a>
-							<a href="xuat-hoa-don?orderID=${orders.orderID}"
-								style="text-decoration: none;"> <input type="button"
-								value="Xuất hóa đơn"
-								style="cursor: pointer; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">
-							</a>
 							<table class="table">
 								<thead class="thead-light">
 									<tr>
@@ -372,7 +361,8 @@
 												</p>
 												<p>50.000đ</p>
 												<p>
-													<fmt:formatNumber value="${tongThanhToan}" type="currency" />
+													<fmt:formatNumber value="${tongThanhToan}"
+														type="currency" />
 												</p>
 											</div>
 										</td>
@@ -487,18 +477,6 @@
 			<!-- /. tiny-footer -->
 		</div>
 	</div>
-	<c:if test="${baoLoi2 == true }">
-		<div class="modal" id="successModal">
-			<div class="modal-content">
-				<img
-					src="https://tse1.mm.bing.net/th?id=OIP.jZnEX7kzfh_5H-lln_XraAHaDt&pid=Api&P=0&h=180"
-					alt="Notify Icon" style="width: 100px; height: 50px" />
-				<h3>${mess}</h3>
-				<button class="btn-close" onclick="closeModal()" name="action"
-					value="xacThuc">Đóng</button>
-			</div>
-		</div>
-	</c:if>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="js/jquery.min.js" type="text/javascript"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -506,13 +484,6 @@
 	<script src="js/menumaker.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/jquery.sticky.js"></script>
 	<script type="text/javascript" src="js/sticky-header.js"></script>
-	<script type="text/javascript">
-	function closeModal() {
-		document.getElementById("successModal").style.display = "none";
-
-	}
-	
-	</script>
 	<script type="text/javascript">
 	const searchBox = document.getElementById("searchBox");
 	const suggestionsList = document.getElementById("product-suggestions");

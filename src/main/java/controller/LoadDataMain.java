@@ -68,8 +68,8 @@ public class LoadDataMain extends HttpServlet {
 		    if (user != null) {
 		        // Nếu user tồn tại trong session, lấy danh sách sản phẩm yêu thích
 		        ProductFavoriteDAO productFaDao = new ProductFavoriteDAO();
-		        int lstProductFavoriteDao = productFaDao.getSoLuong2(user.getUserID());
-		        request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao);
+		        List<ProductFavorite> lstProductFavoriteDao = productFaDao.getLstProFavorite(user.getUserID());
+		        request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao.size());
 		        ListOrderDetailsItem li = (ListOrderDetailsItem) session.getAttribute("listItem");
 		        String slSP = "";
 				if (li != null) {
@@ -78,6 +78,7 @@ public class LoadDataMain extends HttpServlet {
 				} else {
 					slSP = "0";
 				}
+				System.out.println("số lượng sp là: "+slSP);
 				request.setAttribute("soLuongSP", slSP);
 				String uri = request.getRequestURI();
 				String uriReal = xuLyURI(uri);

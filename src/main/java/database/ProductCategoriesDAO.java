@@ -12,24 +12,7 @@ public class ProductCategoriesDAO implements DAOInterface<ProductCategories> {
 	@Override
 	public ArrayList<ProductCategories> selectAll() {
 		// TODO Auto-generated method stub
-		ArrayList<ProductCategories> lst = new ArrayList<ProductCategories>();
-		try {
-			Connection con = JDBCUtil.getConnection();
-			String sql = "SELECT * FROM productcategories";
-			PreparedStatement stm = con.prepareStatement(sql);
-			ResultSet rs = stm.executeQuery();
-			while(rs.next()) {
-				String proCateID = rs.getString("productCategoriesID");
-				String nameProCate = rs.getString("nameCategories");
-				ProductCategories pro = new ProductCategories(proCateID, nameProCate);
-				lst.add(pro);
-			}
-			JDBCUtil.closeConnection(con);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return lst;
+		return null;
 	}
 
 	@Override

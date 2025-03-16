@@ -77,7 +77,7 @@ public class LoadProductByOsController extends HttpServlet {
 				}
 
 				ProductFavoriteDAO productFaDao = new ProductFavoriteDAO();
-				int lstProductFavoriteDao = productFaDao.getSoLuong2(user.getUserID());
+				List<ProductFavorite> lstProductFavoriteDao = productFaDao.getLstProFavorite(user.getUserID());
 				String uri = request.getRequestURI();
 				String uriReal = xuLyURI(uri);
 				String thamSo = URLEncoder.encode(request.getQueryString(), "UTF-8");
@@ -87,7 +87,7 @@ public class LoadProductByOsController extends HttpServlet {
 				request.setAttribute("checkHetHang", checkVar1);
 				request.setAttribute("uri", uriReal);
 				request.setAttribute("thamSo", thamSo);
-				request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao);
+				request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao.size());
 				request.setAttribute("soLuongSP", slSP);
 				request.setAttribute("currentPage", pageInt);
 				request.setAttribute("listPro", lst);

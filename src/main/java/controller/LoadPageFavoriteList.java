@@ -12,12 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import database.ProductFavoriteDAO;
 import database.ProductReviewDAO;
 import database.UserDao;
-import model.ListOrderDetailsItem;
 import model.ProductFavorite;
 import model.ProductReview;
 
@@ -43,24 +41,13 @@ public class LoadPageFavoriteList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 HttpSession session = request.getSession(false); 
 		String userID = request.getParameter("userID") + "";
 		System.out.println("userID là: "+userID);
 		ProductFavoriteDAO productFaDao = new ProductFavoriteDAO();
 		List<ProductFavorite> lstProductFavoriteDao = productFaDao.getLstProFavorite(userID);
-		int lstInt = productFaDao.getSoLuong2(userID);
-//		for (ProductFavorite productFavorite : lstProductFavoriteDao) {
-//			System.out.println(productFavorite.getProduct().getName());
-//		}
-		   ListOrderDetailsItem li = (ListOrderDetailsItem) session.getAttribute("listItem");
-	        String slSP = "";
-			if (li != null) {
-				slSP = li.getList().size() + "";
-				slSP = (slSP == "0") ? "0" : slSP;
-			} else {
-				slSP = "0";
-			}
-			request.setAttribute("soLuongSP", slSP);
+		for (ProductFavorite productFavorite : lstProductFavoriteDao) {
+			System.out.println(productFavorite.getProduct().getName());
+		}
 		String baoLoi = "";
 		if (lstProductFavoriteDao.size() == 0) {
 			baoLoi = "Bạn chưa có sản phẩm yêu thích nào";
@@ -68,7 +55,7 @@ public class LoadPageFavoriteList extends HttpServlet {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/noProductFavorite.jsp");
 			rd.forward(request, response);
 		} else {
-			request.setAttribute("soLuongSanPhamLike", lstInt);
+			request.setAttribute("soLuongSanPhamLike", lstProductFavoriteDao.size());
 		    request.setAttribute("danhSach", lstProductFavoriteDao);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/favorite-list.jsp");
 			rd.forward(request, response);
