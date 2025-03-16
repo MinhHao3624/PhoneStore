@@ -70,7 +70,7 @@
                 class="menu-icon fas fa-shopping-cart font-list"></i></a>
           </li>
           <li>
-            <a href="admin-branch.html" class="list-group-item list-group-item-action "> Thông
+            <a href="${pageContext.request.contextPath}/load-product-categories" class="list-group-item list-group-item-action "> Thông
               tin
               thương hiệu <i class="menu-icon fas fa-archway"></i></a>
           </li>
@@ -79,7 +79,7 @@
               hàng bị hủy <i class="menu-icon fas fa-phone-slash"></i></a>
           </li>
           <li>
-            <a href="feedback.html" class="list-group-item list-group-item-action"> Phản hồi khách hàng <i
+            <a href="${pageContext.request.contextPath}/load-feedback" class="list-group-item list-group-item-action"> Phản hồi khách hàng <i
                 class="menu-icon far fa-paper-plane"></i></a>
           </li>
           <!-- <li>

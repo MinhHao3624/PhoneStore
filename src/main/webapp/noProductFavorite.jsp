@@ -12,7 +12,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="keywords" content="">
-<title>Duy TV</title>
+<title>No product favorite</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
@@ -226,10 +226,9 @@
 								<li><a
 									href="http://localhost:8080/MobileWebApp/load-product?page=1">Điện
 										thoại</a></li>
-								<li><a href="blog-default.html">Bài viết</a></li>
-								<li><a href="about.html">Thông tin</a></li>
-
-								<li><a href="contact-us.html">Liên hệ</a></li>
+								<li><a href="go-to-blog">Thông tin</a></li>
+								<li><a href="go-to-about">Bài viết</a></li>
+								<li><a href="http://localhost:8080/MobileWebApp/go-to-contactus">Liên hệ, hỗ trợ</a></li>
 							</ul>
 						</div>
 					</div>

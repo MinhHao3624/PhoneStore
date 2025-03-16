@@ -13,7 +13,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>DuyAnh LT WEB</title>
+    <title>Profile receipt</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Style CSS -->
@@ -202,7 +202,7 @@
 								<li><a href="http://localhost:8080/MobileWebApp/dang-xuat"
 									class="title hidden-xs">Log out </a></li>
 								<li><a href="load-page-favorite-list?userID=${sessionScope.khachHang.userID}"><i class="fa fa-heart"></i><sup class="cart-quantity">${soLuongSanPhamLike}</sup></a></li>
-								<li><a href="cart.html" class="title"><i
+								<li><a href="go-to-cart" class="title"><i
 										class="fa fa-shopping-cart"></i><sup class="cart-quantity">${soLuongSP}</sup></a>
 								</li>
 							</c:if>
@@ -225,10 +225,9 @@
 								<li><a
 									href="http://localhost:8080/MobileWebApp/load-product?page=1">Điện
 										thoại</a></li>
-								<li><a href="blog-default.html">Bài viết</a></li>
-								<li><a href="about.html">Thông tin</a></li>
-
-								<li><a href="contact-us.html">Liên hệ</a></li>
+								<li><a href="go-to-blog">Thông tin</a></li>
+								<li><a href="go-to-about">Bài viết</a></li>
+								<li><a href="http://localhost:8080/MobileWebApp/go-to-contactus">Liên hệ, hỗ trợ</a></li>
 							</ul>
 						</div>
 					</div>
@@ -268,6 +267,8 @@
                             <ul>
                                 <a href="http://localhost:8080/MobileWebApp/account-login?userID=${sessionScope.khachHang.userID}"><li class="slide-bar "><i class="fa fa-edit"></i><span>Thông tin tài khoản</span></li></a>
                                 <a href="go-to-don-hang?page=1"><li class="slide-bar active"><i class="fas fa-money-check"></i><span>Quản lý đơn hàng</span></li></a>
+                                <a href="go-to-phan-hoi?page=1"><li class="slide-bar"><i
+										class="fas fa-money-check"></i><span>Phản hồi</span></li></a>
                                 <!-- <a href="address-deliver.html"><li class="slide-bar"><i class="fas fa-map-marker-alt"></i><span> Địa chỉ nhận hàng</span></li></a> -->
                                 <a href="http://localhost:8080/MobileWebApp/profile-reset-password?userID=${sessionScope.khachHang.userID}"> <li class="slide-bar"><i class="fas fa-lock"></i><span> Đổi mật khẩu</span></li></a>
                             </ul>

@@ -13,7 +13,7 @@
 	content="create ecommerce website template for your online store, responsive mobile templates">
 <meta name="keywords"
 	content="ecommerce website templates, online store,">
-<title>Duy Anh Lập trình Web</title>
+<title>Success sign up mail</title>
 <!-- Bootstrapppppp -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
