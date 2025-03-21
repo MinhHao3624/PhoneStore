@@ -16,7 +16,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="keywords" content="">
-<title>Login</title>
+<title>Duy Anh Lập trình Web</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
@@ -198,14 +198,10 @@
 	<!-- top-header-->
 	<!-- top-header-->
 	<%
-	    Map<String, String> m = (Map<String, String>) request.getAttribute("map");
-	    if(m == null) {
-	    	m = new NgonNguDAO().vietnameseLanguage();
-	    }
-	
-	
-	
-	
+	Map<String, String> m = (Map<String, String>) request.getAttribute("map");
+	if (m == null) {
+		m = new NgonNguDAO().vietnameseLanguage();
+	}
 	%>
 	<div class="top-header">
 		<div class="container">
@@ -261,11 +257,10 @@
 					<div class="account-section">
 						<ul>
 							<c:if test="${empty sessionScope.khachHang}">
-								<li><a href="noAccount.jsp" class="title hidden-xs">
-										<%= m.get("Login.TaiKhoan") %></a></li>
+								<li><a href="noAccount.jsp" class="title hidden-xs"> <%=m.get("Login.TaiKhoan")%></a></li>
 								<li class="hidden-xs">|</li>
-								<li><a href="login-form.jsp" class="title hidden-xs"><%= m.get("Login.DangNhap") %>
-										</a></li>
+								<li><a href="login-form.jsp" class="title hidden-xs"><%=m.get("Login.DangNhap")%>
+								</a></li>
 							</c:if>
 							<c:if test="${not empty sessionScope.khachHang}">
 								<li><a
@@ -296,13 +291,14 @@
 						<!-- navigations-->
 						<div id="navigation">
 							<ul>
-								<li class="active"><a href="LoadDataMain"><%= m.get("Login.TrangChu") %></a></li>
+								<li class="active"><a href="LoadDataMain"><%=m.get("Login.TrangChu")%></a></li>
 								<li><a
-									href="http://localhost:8080/MobileWebApp/load-product?page=1"><%= m.get("Login.DienThoai") %>
-										</a></li>
-								<li><a href="go-to-blog"><%= m.get("Login.ThongTin") %></a></li>
-								<li><a href="go-to-about"><%= m.get("Login.BaiViet") %></a></li>
-								<li><a href="http://localhost:8080/MobileWebApp/go-to-contactus"><%= m.get("Login.LienHe") %></a></li>
+									href="http://localhost:8080/MobileWebApp/load-product?page=1"><%=m.get("Login.DienThoai")%>
+								</a></li>
+								<li><a href="go-to-blog"><%=m.get("Login.ThongTin")%></a></li>
+								<li><a href="go-to-about"><%=m.get("Login.BaiViet")%></a></li>
+								<li><a
+									href="http://localhost:8080/MobileWebApp/go-to-contactus"><%=m.get("Login.LienHe")%></a></li>
 							</ul>
 						</div>
 					</div>
@@ -312,18 +308,17 @@
 		</div>
 	</div>
 	<div class="dropdown">
-        <button class="dropdown-button" id="dropdownButton">Ngôn Ngữ</button>
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a class="dropdown-item" href="da-ngon-ngu?lang=vi">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg" alt="Vietnamese">
-                Tiếng Việt
-            </a>
-            <a class="dropdown-item" href="da-ngon-ngu?lang=en">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" alt="English">
-                English
-            </a>
-        </div>
-    </div>
+		<button class="dropdown-button" id="dropdownButton">Ngôn Ngữ</button>
+		<div class="dropdown-menu" id="dropdownMenu">
+			<a class="dropdown-item" href="da-ngon-ngu?lang=vi"> <img
+				src="https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Vietnam.svg"
+				alt="Vietnamese"> Tiếng Việt
+			</a> <a class="dropdown-item" href="da-ngon-ngu?lang=en"> <img
+				src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg"
+				alt="English"> English
+			</a>
+		</div>
+	</div>
 
 	<!-- /. header-section-->
 	<div class="page-header">
@@ -332,8 +327,8 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="page-breadcrumb">
 						<ol class="breadcrumb">
-							<li><a href="#"><%= m.get("Login.TrangChu") %></a></li>
-							<li><%= m.get("Login.DangNhap") %></li>
+							<li><a href="#"><%=m.get("Login.TrangChu")%></a></li>
+							<li><%=m.get("Login.DangNhap")%></li>
 						</ol>
 					</div>
 
@@ -352,7 +347,7 @@
 						<div class="box-body">
 							<div class="row">
 								<div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 mb20">
-									<h3 class="mb10"><%= m.get("Login.DangNhap") %></h3>
+									<h3 class="mb10"><%=m.get("Login.DangNhap")%></h3>
 								</div>
 								<!-- form -->
 								<%
@@ -361,10 +356,14 @@
 								boolean check1 = false;
 								boolean check2 = false;
 								boolean check3 = false;
+								boolean check4 = false;
+								boolean check5 = false;
 								String msg = "";
+								String error = request.getAttribute("error") + "";
+								error = error.equals("null") ? "" : error;
 								if (sourceServlet.equals("loginController")) {
-									String error = request.getAttribute("error") + "";
-									error = error.equals("null") ? "" : error;
+									/* String error = request.getAttribute("error") + "";
+									error = error.equals("null") ? "" : error; */
 									String thongBao = request.getAttribute("thongBao") + "";
 									thongBao = thongBao.equals("null") ? "" : thongBao;
 									if (error.equals("taiKhoanChuaXacNhan")) {
@@ -376,8 +375,21 @@
 									} else if (error.equalsIgnoreCase("taikhoanbikhoa")) {
 										check3 = true;
 										msg = thongBao;
+									} else if (error.equalsIgnoreCase("errorAccountEqualsTen")) {
+										check4 = true;
+										msg = thongBao;
+									} else if (error.equalsIgnoreCase("errorAccountEqualsFive")) {
+										check5 = true;
+										msg = thongBao;
 									}
 
+								}
+								%>
+								<%
+								if (check5 == true) {
+								%>
+								<div class="alert alert-danger"><%=msg%></div>
+								<%
 								}
 								%>
 								<form action="Login-Servlet" method="post">
@@ -386,8 +398,8 @@
 											<label class="control-label sr-only" for="email"></label>
 											<div class="login-input">
 												<input id="email" type="text" class="form-control"
-													placeholder="<%= m.get("Login.TenDangNhap") %>" required="required"
-													name="userName">
+													placeholder="<%=m.get("Login.TenDangNhap")%>"
+													required="required" name="userName">
 												<div class="login-icon">
 													<i class="fa fa-user"></i>
 												</div>
@@ -399,7 +411,8 @@
 											<label class="control-label sr-only"></label>
 											<div class="login-input">
 												<input name="password" type="password" class="form-control"
-													placeholder="<%= m.get("Login.MatKhau") %>" required="required">
+													placeholder="<%=m.get("Login.MatKhau")%>"
+													required="required">
 												<div class="login-icon">
 													<i class="fa fa-lock"></i>
 												</div>
@@ -410,18 +423,24 @@
 										</div>
 									</div>
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb20 ">
-										<button class="btn btn-primary btn-block mb10"><%= m.get("Login.DangNhap") %>
-											</button>
+										<%-- <button class="btn btn-primary btn-block mb10"><%= m.get("Login.DangNhap") %>
+											</button> --%>
+										<button id="loginButton"
+											class="btn btn-primary btn-block mb10"
+											<%="errorAccountEqualsFive".equals(error) ? "disabled" : ""%>>
+											<%=m.get("Login.DangNhap")%>
+										</button>
 										<div style="margin: 0 auto; width: 50%">
 											<a href="signup-form.jsp" style="margin-right: 40px;"
-												class="text-blue"><%= m.get("Login.DangKy") %></a> <a href="forgot-password.jsp"
-												class="text-blue"><%= m.get("Login.QuenMK") %> </a>
+												class="text-blue"><%=m.get("Login.DangKy")%></a> <a
+												href="forgot-password.jsp" class="text-blue"><%=m.get("Login.QuenMK")%>
+											</a>
 										</div>
 									</div>
 								</form>
 
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-									<h4 class="mb20"><%= m.get("Login.Other1") %></h4>
+									<h4 class="mb20"><%=m.get("Login.Other1")%></h4>
 									<div class="social-media">
 										<a href="#" class="btn-social-rectangle btn-facebook"><i
 											class="fa fa-facebook"></i><span class="social-text">Facebook</span></a>
@@ -444,8 +463,8 @@
 									<img src="images/feature_icon_1.png" alt="">
 								</div>
 								<div class="feature-content">
-									<h4><%= m.get("Login.MucDoUyTin") %></h4>
-									<p><%= m.get("Login.text1") %></p>
+									<h4><%=m.get("Login.MucDoUyTin")%></h4>
+									<p><%=m.get("Login.text1")%></p>
 								</div>
 							</div>
 							<div class="feature-left">
@@ -453,8 +472,8 @@
 									<img src="images/feature_icon_2.png" alt="">
 								</div>
 								<div class="feature-content">
-									<h4><%= m.get("Login.Other2") %></h4>
-									<p><%= m.get("Login.text2") %></p>
+									<h4><%=m.get("Login.Other2")%></h4>
+									<p><%=m.get("Login.text2")%></p>
 								</div>
 							</div>
 							<div class="feature-left">
@@ -462,8 +481,8 @@
 									<img src="images/feature_icon_3.png" alt="">
 								</div>
 								<div class="feature-content">
-									<h4><%= m.get("Login.Other3") %></h4>
-									<p><%= m.get("Login.text3") %></p>
+									<h4><%=m.get("Login.Other3")%></h4>
+									<p><%=m.get("Login.text3")%></p>
 								</div>
 							</div>
 						</div>
@@ -476,7 +495,7 @@
 	<!-- /.login-form -->
 	<!-- footer -->
 	<!-- footer -->
-	 
+
 
 	<div class="footer">
 		<div class="container">
@@ -618,6 +637,38 @@
 	<%
 	}
 	%>
+	<%
+	if (check4 == true) {
+	%>
+	<div class="modal" id="successModal">
+		<div class="modal-content">
+			<img
+				src="https://tse1.mm.bing.net/th?id=OIP.jZnEX7kzfh_5H-lln_XraAHaDt&pid=Api&P=0&h=180"
+				alt="Notify Icon" style="width: 100px; height: 50px" />
+			<h3><%=msg%></h3>
+			<button class="btn-close" onclick="closeModal()">Đóng</button>
+		</div>
+	</div>
+	<%
+	}
+	%>
+	<script>
+    // Nếu tài khoản bị khóa, đếm ngược 30 giây trước khi bật lại nút đăng nhập
+    <% if ("errorAccountEqualsFive".equals(error)) { %>
+        let countdown = 30;
+        let loginButton = document.getElementById("loginButton");
+        let interval = setInterval(() => {
+            if (countdown > 0) {
+                loginButton.innerText = "Vui lòng đợi " + countdown + "s";
+                countdown--;
+            } else {
+                loginButton.innerText = "<%= m.get("Login.DangNhap") %>";
+                loginButton.disabled = false;
+                clearInterval(interval);
+            }
+        }, 1000);
+    <% } %>
+</script>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<!-- Bootstrap JS -->
