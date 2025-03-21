@@ -13,7 +13,7 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="keywords" content="">
-<title>Product Single</title>
+<title>Duy Anh LTW</title>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Style CSS -->
@@ -282,7 +282,7 @@
 									class="title hidden-xs">Log out </a></li>
 								<li><a href="load-page-favorite-list?userID=${sessionScope.khachHang.userID}"><i class="fa fa-heart"></i><sup class="cart-quantity">${soLuongSanPhamLike}</sup></a></li>
 								<li><a href="go-to-cart" class="title"><i
-										class="fa fa-shopping-cart"></i><sup class="cart-quantity">${soLuongSP}</sup></a>
+										class="fa fa-shopping-cart"></i><sup class="cart-quantity" id = "cart-quantity">${soLuongSP}</sup></a>
 								</li>
 							</c:if>
 						</ul>
@@ -1368,18 +1368,19 @@
 	<script type="text/javascript">
 	document.querySelector('.add-to-cart').addEventListener('click', function() {
 	    const productID = this.getAttribute('data-product-id');
+	    const soLuong = document.getElementById("quantity-input").value;
 
-	    fetch(`add-to-cart2?productID=`+productID, {
+	    fetch(`add-to-cart2?productID=`+productID+`&soLuong=`+soLuong, {
 	        method: 'GET',
 	    })
 	    .then(response => response.json()) // Chuyển đổi kết quả thành JSON
         .then(data => {
             if (data.success) {
             	   // Cập nhật số lượng sản phẩm trong giỏ hàng
-    	        const cartQuantityElement = document.querySelector('.cart-quantity');
-    	        cartQuantityElement.textContent = data.soluongSP;
+    	        const cartQuantityElement = document.getElementById("cart-quantity");
+    	        cartQuantityElement.innerHTML = data.soluongSP;
             } else {
-                alert("Xóa sản phẩm thất bại: " + data.message);
+                alert("Sản phẩm này đã tồn tại trong giỏ hàng của bạn");
             }
         })
         .catch(error => {
