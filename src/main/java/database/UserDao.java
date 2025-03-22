@@ -280,7 +280,7 @@ public class UserDao implements DAOInterface<User> {
 //		User us = userDao.selectByUserNameAndPassWord(user);
 //		System.out.println(us.getFullName());
 //		System.out.println(us.getPassWord());
-		System.out.println(userDao.deleteByEmail("22130063@st.hcmuaf.edu.vn"));
+		System.out.println(userDao.deleteByEmail("soul362004@gmail.com"));
 
 	}
 
@@ -653,6 +653,73 @@ public class UserDao implements DAOInterface<User> {
 			res = stm.executeUpdate();
 			System.out.println("Bạn đã tt " + sql);
 			System.out.println("có kq " + res);
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	public boolean checkUserNameIsTrue(String userName) {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		try {
+			Connection con = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM user WHERE userName = ?";
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, userName.trim());
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()) {
+				res = true;
+				break;
+			}
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return res;
+
+	}
+
+	public int khoaTaiKhoanViNhapSaiHonMuoiLan(String userName) {
+		// TODO Auto-generated method stub
+		int res = 0;
+		try {
+			Connection con = JDBCUtil.getConnection();
+			String sql = "UPDATE user SET isKey = ? WHERE userName = ?";
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, "Bị khóa");
+			stm.setString(2, userName.trim());
+			res = stm.executeUpdate();
+			JDBCUtil.closeConnection(con);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return res;
+		
+	}
+
+	public boolean kiemTraNameUserHasBlock(String userName) {
+		// TODO Auto-generated method stub
+		boolean res = false;
+		String mess = "";
+		try {
+			Connection con = JDBCUtil.getConnection();
+			String sql = "SELECT * FROM user WHERE userName = ?";
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setString(1, userName);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()) {
+				mess = rs.getString("isKey");
+				if(mess.equalsIgnoreCase("Bị khóa")) {
+					res = true;
+				}
+				break;
+			}
+			JDBCUtil.closeConnection(con);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
