@@ -53,31 +53,51 @@ public class AddToCart2Control extends HttpServlet {
 				ListOrderDetails listOrder = (ListOrderDetails) session.getAttribute("cart");
 				ProductDao proDAO = new ProductDao();
 				String id = request.getParameter("productID");
+				String soLuong = request.getParameter("soLuong");
+				System.out.println(soLuong +" ok let go");
 				Product pro = proDAO.selectProByID(id);
-				String orderDetailsID = getOrderDetailsIDCur(listItem);
-				String next = xuLy(orderDetailsID);
-				Orders order = listOrder.getMap().keySet().iterator().next();
-				OrderDetails orderDetails = new OrderDetails(next, 1, pro, order,
-						Double.valueOf(xuLyChuoi(pro.getPrice())));
-				listItem.addItem(orderDetails);
-				listOrder.getMap().replace(order, listItem);
-				session.setAttribute("listItem", listItem);
-				session.setAttribute("cart", listOrder);
-				success = true;
-				slsp = listItem.getList().size();
-				JsonResponse jsonResponse = new JsonResponse(success, slsp);
-				PrintWriter out = response.getWriter();
-				Gson gson = new Gson();
-				out.print(gson.toJson(jsonResponse));
-				out.flush();
-			} else {
+				if(!checkProductExist(pro, listItem)) {
+					String orderDetailsID = getOrderDetailsIDCur(listItem);
+					String next = xuLy(orderDetailsID);
+					System.out.println("Đã vào đây");
+					Orders order = listOrder.getMap().keySet().iterator().next();
+					OrderDetails orderDetails = new OrderDetails(next, Integer.valueOf(soLuong), pro, order,
+							Double.valueOf(xuLyChuoi(pro.getPrice())));
+					listItem.addItem(orderDetails);
+					listOrder.getMap().replace(order, listItem);
+					session.setAttribute("listItem", listItem);
+					session.setAttribute("cart", listOrder);
+					success = true;
+					slsp = listItem.getList().size();
+					JsonResponse jsonResponse = new JsonResponse(success, slsp);
+					PrintWriter out = response.getWriter();
+					Gson gson = new Gson();
+					out.print(gson.toJson(jsonResponse));
+					out.flush();
+				}else {
+					slsp = listItem.getList().size();
+					JsonResponse jsonResponse = new JsonResponse(success, slsp);
+					PrintWriter out = response.getWriter();
+					Gson gson = new Gson();
+					out.print(gson.toJson(jsonResponse));
+					out.flush();
+				}
 				
-
-			}
+			} 
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+
+	private boolean checkProductExist(Product pro, ListOrderDetailsItem listItem) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listItem.getList().size(); i++) {
+			if(pro.getProductID().equalsIgnoreCase(listItem.getList().get(i).getProduct().getProductID())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public class JsonResponse {

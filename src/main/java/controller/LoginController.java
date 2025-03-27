@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,12 @@ import util.NgonNguDAO;
 @WebServlet("/Login-Servlet")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final int MAX_ATTEMPTS = 5;
+	private static int COUNT = 0;
+	private static List<String> LIST_NAME = new ArrayList<String>();
+	private static String USER_NAME = "";
+	private static int COUNT2 = 0;
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -72,6 +79,8 @@ public class LoginController extends HttpServlet {
 		Map<String, String> m = new NgonNguDAO().vietnameseLanguage();
 		request.setAttribute("map", m);
 		if (us != null) {
+			COUNT2 = 0;
+			COUNT = 0;
 			if (us.getRole().getRoleID() == 2) {
 				if (us.getStatus() == 1) {
 					if (us.getIsKey().equalsIgnoreCase("Hoạt động")) {
@@ -79,7 +88,7 @@ public class LoginController extends HttpServlet {
 						session.setAttribute("khachHang", us);
 						User user2 = (User) session.getAttribute("khachHang");
 						url = "/index.jsp";
-						int soLuongSanPhamLike = proFaDao.getSoLuong(user2.getUserID().trim());
+						int soLuongSanPhamLike = proFaDao.getSoLuong2(user2.getUserID().trim());
 						ListOrderDetailsItem li = (ListOrderDetailsItem) session.getAttribute("listItem");
 						String slSP = "";
 						if (li != null) {
@@ -130,14 +139,80 @@ public class LoginController extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} else {
-			url = "/login-form.jsp";
-			notify = "Tên đăng nhập hoặc mật khẩu không chính xác";
-			error = "errorUserNameOrPass";
-			request.setAttribute("sourceServlet", "loginController");
-			request.setAttribute("error", error);
-			request.setAttribute("thongBao", notify);
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
-			rd.forward(request, response);
+			if(userDao.checkUserNameIsTrue(userName)) {
+			COUNT2++;
+			if(!USER_NAME.equalsIgnoreCase(userName) && COUNT2 != 1) {
+				COUNT2 = 0;
+			}
+			System.out.println(COUNT2+" số là số");
+			USER_NAME = userName;
+			if(COUNT2 > 5 && COUNT2 <= 10) {
+				notify = "Bạn đã nhập sai tk mk 5 lần. Vui lòng thử lại sau 30s";
+				error = "errorAccountEqualsFive";
+				url = "/login-form.jsp";
+				request.setAttribute("sourceServlet", "loginController");
+				request.setAttribute("error", error);
+				request.setAttribute("thongBao", notify);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+				rd.forward(request, response);
+				
+			}else if(COUNT2 > 10) {
+				notify = "Bạn đã nhập sai tk mk hơn 10 lần. Nên tài khoản của bạn tạm thời bị khóa";
+				error = "errorAccountEqualsTen";
+				url = "/login-form.jsp";
+				if(!userDao.kiemTraNameUserHasBlock(userName)) {
+					int ans = userDao.khoaTaiKhoanViNhapSaiHonMuoiLan(userName);
+				}
+				request.setAttribute("sourceServlet", "loginController");
+				request.setAttribute("error", error);
+				request.setAttribute("thongBao", notify);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+				rd.forward(request, response);
+			}else {
+				url = "/login-form.jsp";
+				notify = "Tên đăng nhập hoặc mật khẩu không chính xác";
+				error = "errorUserNameOrPass";
+				request.setAttribute("sourceServlet", "loginController");
+				request.setAttribute("error", error);
+				request.setAttribute("thongBao", notify);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+				rd.forward(request, response);
+			}
+		}else {
+			COUNT++;
+			if(COUNT > 5) {
+				notify = "Bạn đã nhập sai tk mk 5 lần. Vui lòng thử lại sau 30s";
+				error = "errorAccountEqualsFive";
+				url = "/login-form.jsp";
+				request.setAttribute("sourceServlet", "loginController");
+				request.setAttribute("error", error);
+				request.setAttribute("thongBao", notify);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+				rd.forward(request, response);
+			}else {
+				url = "/login-form.jsp";
+				notify = "Tên đăng nhập hoặc mật khẩu không chính xác";
+				error = "errorUserNameOrPass";
+				request.setAttribute("sourceServlet", "loginController");
+				request.setAttribute("error", error);
+				request.setAttribute("thongBao", notify);
+				RequestDispatcher rd = getServletContext().getRequestDispatcher(url);
+				rd.forward(request, response);
+			}
+		}
+		}
+	}
+
+
+	public static void main(String[] args) {
+		List<String> li = new ArrayList<String>();
+		li.add("anhduy");
+		li.add("thudung");
+		li.add("badao");
+		li.remove(li.size() -2);
+		for (String string : li) {
+			System.out.println(string);
+			
 		}
 	}
 
